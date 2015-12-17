@@ -1,0 +1,48 @@
+html, body {
+	height: 100%;
+}
+
+#map {
+	height: 98%;
+}
+
+.infoblock {
+	padding: 25px;
+    width: 90%;
+    margin: 10px;
+    background-color:#ffffff;
+    border:1px solid #e3e3e3;
+    border-radius:4px;
+    -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+.slider {
+	margin-bottom: 15px;
+}
+
+/*
+.grave-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	background-color: rgba(255,127,80,.6);
+}
+
+.grave-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	background-color: rgba(255,127,80,.6);
+}
+
+.grave-cluster span {
+	line-height: 30px;
+}
+*/
+
+
+.leaflet-touch .leaflet-bar-part-single{-webkit-border-radius:7px 7px 7px 7px;border-radius:7px 7px 7px 7px;border-bottom:none}.leaflet-touch .leaflet-control-locate{box-shadow:none;border:2px solid rgba(0,0,0,0.2);background-clip:padding-box}.leaflet-control-locate a{font-size:1.4em;color:#444}.leaflet-control-locate.active a{color:#2074B6}.leaflet-control-locate.active.following a{color:#FC8428}

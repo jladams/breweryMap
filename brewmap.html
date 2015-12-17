@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>US Breweries</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+ 		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		<script src="leaflet.markercluster.js" type="text/javascript"></script>
+  		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  		<script src="leaflet-sidebar.js"></script>
+        
+<!-- 	Links to static data -->
+  		<script src="data/breweries.json" type="text/javascript"></script>
+
+<!--	Styles -->
+		<link rel="stylesheet" href="styles/MarkerCluster.css" />
+		<link rel="stylesheet" href="styles/MarkerCluster.Default.css" />
+  		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/leaflet-sidebar.css" />
+    	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+<!--		<link rel="stylesheet" href="https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" /> -->
+		<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet"/>
+		<style>
+		    html, body, #map {
+		        height: 100%;
+		    }
+		</style>
+        <script src="https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js"></script>
+	</head>
+
+	<body>
+<!--    Sidebar -->		
+		<div id="sidebar" class="sidebar collapsed" style="height:90%">
+        	<!-- Nav tabs -->
+        	<div class="sidebar-tabs">
+            	<ul role="tablist">
+                	<li id="content-tab"><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                	<li><a href="#filters" role="tab"><i class="fa fa-sliders"></i></a></li>
+            	</ul>
+
+            	<ul role="tablist">
+            	</ul>
+        	</div>
+
+<!-- 		Tab panes -->
+        	<div class="sidebar-content">
+            	<div class="sidebar-pane" id="home">
+                	<h1 class="sidebar-header">Breweries<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+					<div id="main-content"></div>
+            	</div>
+            	<div class="sidebar-pane" id="filters">
+                	<h1 class="sidebar-header">Filters<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                	<div id="typeFilter">
+                		<p>Brewery Type</p>
+						<form id="filterChecks">
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Planning" checked>Planning</br>
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Micro" checked>Micro</br>
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Regional" checked>Regional</br>
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Large" checked>Large</br>
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Brewpub" checked>Brewpub</br>
+						</form>
+					</div>
+            	</div>
+        	</div>
+    	</div>
+
+		<div id="map" class="sidebar-map"></div>
+
+<!-- 	Credits -->
+		<div class="modal fade" id="credits" role="dialog">
+    		<div class="modal-dialog">
+          			<div class="modal-content">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h4 class="modal-title">Credits</h4>
+        			</div>
+        			<div class="modal-body">
+        				<p><strong>Map-Making Library:</strong></p>
+        				<p><a href="http://www.leafletjs.com" target="_blank">Leaflet.js</a></p>
+        				</br>
+          				<p><strong>Map Base Tiles:</strong></p>
+          				<p>Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community</p>
+        				</br>
+        				<p><strong>Clustering Plugin:</strong></p>
+        				<p><a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank">Leaflet.markercluster</a> &copy; 2012 Dave Leaver, smartrak</p>       				
+        				</br>
+        				<p>Data gathered from <a href="https://www.brewersassociation.org/" target="_blank">https://www.brewersassociation.org/</a></p>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			</div>
+      			</div>
+    		</div>
+		</div>
+
+		<script>
+//			Create map and set initial view			
+		    var map = L.map('map', {zoomControl: false}).setView([35.472865, -97.600536], 5);
+			new L.Control.Zoom({ position: 'topright' }).addTo(map);
+
+//			Base tiles
+            var Esri_WorldTopoMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	            attribution: 'Tiles &copy; Esri &mdash; <a data-toggle="modal" data-target="#credits">Credits</a>'
+            }).addTo(map);
+
+//          Create Sidebar
+            var sidebar = L.control.sidebar('sidebar', {}).addTo(map);
+            
+//          Set initial filter variables
+            var type = document.getElementById('filterChecks').breweryType;
+            var typeList = ["Micro","Regional","Large","Brewpub","Planning"];
+                                  						    
+//			Set records variable and call loading function
+			var records 
+			loadRecords();
+
+//			Add Layers to Clusters
+     		var brewerycluster = L.markerClusterGroup().addTo(map);
+     		brewerycluster.addLayer(brewerylayer);
+
+//          Add info to sidebar
+            brewerycluster.on('clusterclick', sidebarInfo);
+
+
+
+			// Scale
+			L.control.scale({position: 'topright'}).addTo(map);
+
+            // Location Controls
+			var lc = L.control.locate({
+				position: 'topright',
+				follow: true,
+			    keepCurrentZoomLevel: false,
+			    stopFollowingOnDrag: false,
+				locateOptions: {
+					enableHighAccuracy: true
+				}
+			}).addTo(map);
+			
+			map.on('dragstart', lc._stopFollowing, lc);
+
+//			Sidebar Functions
+            function FeatureClick() {
+                var info = []
+                var content = document.getElementById('main-content');
+                info.push("<div class='infoblock'>Name: " + this.options.name + "</br>Type: " + this.options.brewery_type + "</br>Address: " + this.options.address + "</br>URL: " + this.options.url + "</div>");
+                content.innerHTML = (info.join("\n"));
+            	$('#sidebar').removeClass('collapsed');
+            	$('#content-tab').addClass('active');
+            	$('#home').addClass('active');
+            }
+            function sidebarInfo(a) {
+                var info = []
+                var bounds = a.layer.getBounds();
+                var content = document.getElementById('main-content');
+                brewerycluster.eachLayer(function(marker) {
+                    if(bounds.contains(marker.getLatLng())) {
+                        info.push("<div class='infoblock'>Name: " + marker.options.name + "</br>" + "Type: " + marker.options.brewery_type + "</div>");
+                    }
+                });
+            	content.innerHTML = (info.join("\n"));
+            	$('#sidebar').removeClass('collapsed');
+            	$('#content-tab').addClass('active');
+            	$('#home').addClass('active');
+            }            
+            function hideSidebar() {
+            	$('#sidebar').addClass('collapsed');
+			}
+			
+ 			function updateType() {
+ 			    typeList = [];
+                for (var i = 0; i < type.length; i++) {
+                    if (type[i].checked) typeList.push(type[i].value);
+                }
+                loadRecords();
+                brewerycluster.clearLayers();
+                brewerycluster.addLayer(brewerylayer);
+ 			}
+
+//          Records Loading Function			    
+		    function loadRecords() {
+			    brewerylayer = new L.geoJson(breweries, {
+			        onEachFeature: function (feature, layer) {
+    		    	    layer.bindPopup("Name: " + feature.properties.Name + "</br>Type: "+ feature.properties.Brewery_Type + "</br>Address: " + feature.properties.Address + "</br>URL: " + feature.properties.URL,{
+    		    		    autoPan: true
+         			    })
+         		    },
+         		    filter: function (feature, layer) {
+         		        return ($.inArray(feature.properties.Brewery_Type, typeList) !=-1);
+         		    },
+         		    pointToLayer: function (feature, latlng) {
+						    return L.circleMarker(latlng, {
+         		    		    radius: 15,
+         		        	    fillColor: "#ff7800",
+         		        	    color: "#000",
+         		        	    name: feature.properties.Name,
+         		        	    brewery_type: feature.properties.Brewery_Type,
+         		        	    address: feature.properties.Address,
+         		        	    url: feature.properties.URL
+         		            }).on('click', FeatureClick)
+     			    }
+     		    });
+     	    };		
+		</script>
+	</body>
+</html>
