@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>US Breweries</title>
+		<title>BrewFinder</title>
+        <link rel="shortcut icon" type="image/x-icon" href="images/beer.jpg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -134,7 +135,7 @@
 				position: 'topright',
 				follow: true,
 			    keepCurrentZoomLevel: false,
-			    stopFollowingOnDrag: false,
+//			    stopFollowingOnDrag: false,
 				locateOptions: {
 					enableHighAccuracy: true
 				}
@@ -146,7 +147,7 @@
             function FeatureClick() {
                 var info = []
                 var content = document.getElementById('main-content');
-                info.push("<div class='infoblock'>Name: " + this.options.name + "</br>Type: " + this.options.brewery_type + "</br>Address: " + this.options.address + "</br>URL: " + this.options.url + "</div>");
+                info.push("<div class='infoblock'>Name: " + this.options.name + "</br>Type: " + this.options.brewery_type + "</br>Address: " + this.options.address + "</br>URL: <a href=\"" + this.options.url + "\"</a>" + this.options.url + "</div>");
                 content.innerHTML = (info.join("\n"));
 //            	$('#sidebar').removeClass('collapsed');
   //          	$('#content-tab').addClass('active');
@@ -184,7 +185,7 @@
 		    function loadRecords() {
 			    brewerylayer = new L.geoJson(breweries, {
 			        onEachFeature: function (feature, layer) {
-    		    	    layer.bindPopup("Name: " + feature.properties.Name + "</br>Type: "+ feature.properties.Brewery_Type + "</br>Address: " + feature.properties.Address + "</br>URL: " + feature.properties.URL,{
+    		    	    layer.bindPopup("Name: " + feature.properties.Name + "</br>Type: "+ feature.properties.Brewery_Type + "</br>Address: " + feature.properties.Address + "</br>URL: <a target=\"_blank\" href=\"" + feature.properties.URL + "\"</a>" + feature.properties.URL + "</br><a href=\"tel:" + feature.properties.Telephone + "\">Call</a>",{
     		    		    autoPan: true
          			    })
          		    },
@@ -194,7 +195,7 @@
          		    pointToLayer: function (feature, latlng) {
 						    return L.circleMarker(latlng, {
          		    		    radius: 15,
-         		        	    fillColor: "#ff7800",
+         		        	    fillColor: "#000080",
          		        	    color: "#000",
          		        	    name: feature.properties.Name,
          		        	    brewery_type: feature.properties.Brewery_Type,
