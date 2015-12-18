@@ -185,7 +185,7 @@
 		    function loadRecords() {
 			    brewerylayer = new L.geoJson(breweries, {
 			        onEachFeature: function (feature, layer) {
-    		    	    layer.bindPopup("Name: " + feature.properties.Name + "</br>Type: "+ feature.properties.Brewery_Type + "</br>Address: " + feature.properties.Address + "</br>URL: <a target=\"_blank\" href=\"" + feature.properties.URL + "\"</a>" + feature.properties.URL + "</br><a href=\"tel:" + feature.properties.Telephone + "\">Call</a>",{
+    		    	    layer.bindPopup(feature.properties.Name + "</br>Type: "+ feature.properties.Brewery_Type + "</br><a target=\"_blank\" href=\"http://www.google.com/maps/place/" + feature.properties.Address + "\">" + feature.properties.Address + "</a></br><a target=\"_blank\" href=\"" + feature.properties.URL + "\"</a>" + feature.properties.URL + "</br><a href=\"tel:" + feature.properties.Telephone + "\">" + feature.properties.Telephone + "</a>",{
     		    		    autoPan: true
          			    })
          		    },
