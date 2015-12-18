@@ -1392,7 +1392,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Cartersville",
+        "Name": "Anheuser-Busch InBev - Cartersville",
         "Address": "100 Busch Dr NE Cartersville, GA 30121-7217",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -6912,7 +6912,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Jacksonville",
+        "Name": "Anheuser-Busch InBev - Jacksonville",
         "Address": "111 Busch Dr Jacksonville, FL 32218-5546",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -22878,7 +22878,7 @@ var breweries = {
         "URL": "http:\/\/www.alamedaislandbrewingcompany.com",
         "URL_Title": "www.alamedaislandbrewingcompany.com",
         "Map_URL": "http:\/\/www.google.com\/maps\/place\/1716 Park Street++Alameda+CA+United States",
-        "Telephone": "(510) 217\u00e2\u20ac\u201c8885"
+        "Telephone": "(510) 217-8885"
       }
     },
     {
@@ -27812,7 +27812,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Newark",
+        "Name": "Anheuser-Busch InBev - Newark",
         "Address": "200 US Highway 1 Newark, NJ 07114-2298",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "http:\/\/www.anheuser-busch.com",
@@ -32852,7 +32852,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Merrimack",
+        "Name": "Anheuser-Busch InBev - Merrimack",
         "Address": "221 Daniel Webster Hwy Merrimack, NH 03054-4807",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -40992,7 +40992,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Baldwinsville",
+        "Name": "Anheuser-Busch InBev - Baldwinsville",
         "Address": "2885 Belgium Rd Baldwinsville, NY 13027-2706",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -44632,7 +44632,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Fairfield",
+        "Name": "Anheuser-Busch InBev - Fairfield",
         "Address": "3101 Busch Dr Fairfield, CA 94534-9726",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -52832,7 +52832,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Karl Strauss Brewing Co \u00e2\u20ac\u201cTemecula",
+        "Name": "Karl Strauss Brewing Co -Temecula",
         "Address": "40868 Winchester Rd Temecula, CA 92591-5521",
         "Brewery_Type": "Brewpub", "Color" : "#ff7f00",
         "URL": "http:\/\/www.karlstrauss.com",
@@ -71352,7 +71352,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Columbus",
+        "Name": "Anheuser-Busch InBev - Columbus",
         "Address": "700 Schrock Rd Columbus, OH 43229-1123",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -74712,7 +74712,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Houston",
+        "Name": "Anheuser-Busch InBev - Houston",
         "Address": "775 Gellhorn Dr Houston, TX 77029-1496",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "",
@@ -74912,7 +74912,7 @@ var breweries = {
       },
       "properties": {
         "Brewery": "brewery",
-        "Name": "Anheuser-Busch InBev \u00e2\u20ac\u201c Williamsburg",
+        "Name": "Anheuser-Busch InBev - Williamsburg",
         "Address": "7801 Pocahontas Trl Williamsburg, VA 23185-6302",
         "Brewery_Type": "Large", "Color" : "#984ea3",
         "URL": "http:\/\/www.anheuser-busch.com",
