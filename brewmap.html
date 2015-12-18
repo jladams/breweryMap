@@ -34,7 +34,7 @@
 
 	<body>
 <!--    Sidebar -->		
-		<div id="sidebar" class="sidebar collapsed" style="height:90%">
+		<div id="sidebar" class="sidebar collapsed" style="height:95%;">
         	<!-- Nav tabs -->
         	<div class="sidebar-tabs">
             	<ul role="tablist">
@@ -133,7 +133,7 @@
             // Location Controls
 			var lc = L.control.locate({
 				position: 'topright',
-				follow: true,
+//				follow: true,
 			    keepCurrentZoomLevel: false,
 //			    stopFollowingOnDrag: false,
 				locateOptions: {
@@ -195,7 +195,8 @@
          		    pointToLayer: function (feature, latlng) {
 						    return L.circleMarker(latlng, {
          		    		    radius: 15,
-         		        	    fillColor: "#000080",
+         		        	    fillColor: feature.properties.Color,
+         		        	    fillOpacity: .7,
          		        	    color: "#000",
          		        	    name: feature.properties.Name,
          		        	    brewery_type: feature.properties.Brewery_Type,
