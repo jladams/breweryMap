@@ -17,6 +17,7 @@
   		<script src="data/breweries.json" type="text/javascript"></script>
 
 <!--	Styles -->
+        <link rel="stylesheet" href="styles/style.css" />
 		<link rel="stylesheet" href="styles/MarkerCluster.css" />
 		<link rel="stylesheet" href="styles/MarkerCluster.Default.css" />
   		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -62,6 +63,8 @@
 							<input type="checkbox" name="breweryType" onclick="updateType();" value="Regional" checked>Regional</br>
 							<input type="checkbox" name="breweryType" onclick="updateType();" value="Large" checked>Large</br>
 							<input type="checkbox" name="breweryType" onclick="updateType();" value="Brewpub" checked>Brewpub</br>
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Proprietor" checked>Proprietor</br>
+							<input type="checkbox" name="breweryType" onclick="updateType();" value="Contract" checked>Contract</br>
 						</form>
 					</div>
             	</div>
@@ -112,7 +115,7 @@
             
 //          Set initial filter variables
             var type = document.getElementById('filterChecks').breweryType;
-            var typeList = ["Micro","Regional","Large","Brewpub","Planning"];
+            var typeList = ["Micro","Regional","Large","Brewpub","Planning", "Proprietor", "Contract"];
                                   						    
 //			Set records variable and call loading function
 			var records 
@@ -147,7 +150,7 @@
             function FeatureClick() {
                 var info = []
                 var content = document.getElementById('main-content');
-                info.push("<div class='infoblock'>Name: " + this.options.name + "</br>Type: " + this.options.brewery_type + "</br>Address: " + this.options.address + "</br>URL: <a href=\"" + this.options.url + "\"</a>" + this.options.url + "</div>");
+                info.push("<div class='infoblock' style=\"background-color:" + this.options.divcolor + ";\">Name: " + this.options.name + "</br>Type: " + this.options.brewery_type + "</br><a target=\"_blank\" href=\"http://www.google.com/maps/place/" + this.options.address + "\">" + this.options.address + "</a></br><a target=\"_blank\" href=\"" + this.options.url + "\">" + this.options.url + "</a></div>");
                 content.innerHTML = (info.join("\n"));
 //            	$('#sidebar').removeClass('collapsed');
   //          	$('#content-tab').addClass('active');
@@ -159,7 +162,7 @@
                 var content = document.getElementById('main-content');
                 brewerycluster.eachLayer(function(marker) {
                     if(bounds.contains(marker.getLatLng())) {
-                        info.push("<div class='infoblock'>Name: " + marker.options.name + "</br>" + "Type: " + marker.options.brewery_type + "</div>");
+                        info.push("<div class='infoblock' style=\"background-color:" + marker.options.divcolor + ";\">Name: " + marker.options.name + "</br>Type: " + marker.options.brewery_type + "</br><a target=\"_blank\" href=\"http://www.google.com/maps/place/" + marker.options.address + "\">" + marker.options.address + "</a></br><a target=\"_blank\" href=\"" + marker.options.url + "\">" + marker.options.url + "</a></div>");
                     }
                 });
             	content.innerHTML = (info.join("\n"));
@@ -201,7 +204,8 @@
          		        	    name: feature.properties.Name,
          		        	    brewery_type: feature.properties.Brewery_Type,
          		        	    address: feature.properties.Address,
-         		        	    url: feature.properties.URL
+         		        	    url: feature.properties.URL,
+         		        	    divcolor: feature.properties.BGColor
          		            }).on('click', FeatureClick)
      			    }
      		    });
