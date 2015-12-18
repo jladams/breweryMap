@@ -195,7 +195,7 @@
          		    pointToLayer: function (feature, latlng) {
 						    return L.circleMarker(latlng, {
          		    		    radius: 15,
-         		        	    fillColor: "#000080",
+         		        	    fillColor: feature.properties.Color,
          		        	    color: "#000",
          		        	    name: feature.properties.Name,
          		        	    brewery_type: feature.properties.Brewery_Type,
