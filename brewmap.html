@@ -133,6 +133,21 @@
 			// Scale
 			L.control.scale({position: 'topright'}).addTo(map);
 
+//			Legend
+			var legend = L.control({position: 'bottomright'});
+			
+			legend.onAdd = function(map) {
+				var div = L.DomUtil.create('div', 'info legend');
+				
+				for (var i = 0; i< typeList.length; i++) {
+					div.innerHTML +=
+						'<i style="background-color:' + getColor(typeList[i]) + '"></i> ' + (typeList[i] ? typeList[i] + '</br>' : '+');
+				}		
+				return div;
+			}
+			
+			legend.addTo(map);
+			
             // Location Controls
 			var lc = L.control.locate({
 				position: 'topright',
@@ -145,6 +160,7 @@
 			}).addTo(map);
 			
 			map.on('dragstart', lc._stopFollowing, lc);
+
 
 //			Sidebar Functions
             function FeatureClick() {
@@ -173,6 +189,17 @@
             function hideSidebar() {
             	$('#sidebar').addClass('collapsed');
 			}
+
+			function getColor(d) {
+				return 	d=='Planning' ? '#e41a1c' :
+						d=='Micro' ? '#377eb8' :
+						d=='Regional' ? '#4daf4a' :
+						d=='Large' ? '#984ea3' :
+						d=='Brewpub' ? '#ff7f00' :
+						d=='Proprietor' ? '#ffff33' :
+						d=='Contract' ? '#a65628':
+							'#ffffff';
+			}
 			
  			function updateType() {
  			    typeList = [];
@@ -181,7 +208,9 @@
                 }
                 loadRecords();
                 brewerycluster.clearLayers();
+                legend.removeFrom(map);
                 brewerycluster.addLayer(brewerylayer);
+                legend.addTo(map);
  			}
 
 //          Records Loading Function			    
