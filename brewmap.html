@@ -25,11 +25,6 @@
     	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
 <!--		<link rel="stylesheet" href="https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" /> -->
 		<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet"/>
-		<style>
-		    html, body, #map {
-		        height: 100%;
-		    }
-		</style>
         <script src="https://raw.githubusercontent.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js"></script>
 	</head>
 
@@ -57,15 +52,7 @@
                 	<h1 class="sidebar-header">Filters<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
                 	<div id="typeFilter">
                 		<p>Brewery Type</p>
-						<form id="filterChecks">
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Planning" checked>Planning</br>
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Micro" checked>Micro</br>
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Regional" checked>Regional</br>
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Large" checked>Large</br>
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Brewpub" checked>Brewpub</br>
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Proprietor" checked>Proprietor</br>
-							<input type="checkbox" name="breweryType" onclick="updateType();" value="Contract" checked>Contract</br>
-						</form>
+						<form id="filterChecks"></form>
 					</div>
             	</div>
         	</div>
@@ -114,8 +101,8 @@
             var sidebar = L.control.sidebar('sidebar', {}).addTo(map);
             
 //          Set initial filter variables
-            var type = document.getElementById('filterChecks').breweryType;
-            var typeList = ["Micro","Regional","Large","Brewpub","Planning","Proprietor","Contract"];
+            var typeList = ["Brewpub","Micro","Proprietor","Regional","Large","Contract","Planning"];
+			addTypes();
                                   						    
 //			Set records variable and call loading function
 			var records 
@@ -128,27 +115,26 @@
 //          Add info to sidebar
             brewerycluster.on('clusterclick', sidebarInfo);
 
-
-
-			// Scale
+// 			Scale
 			L.control.scale({position: 'topright'}).addTo(map);
 
 //			Legend
 			var legend = L.control({position: 'bottomright'});
 			
+//			Legend Function
 			legend.onAdd = function(map) {
-				var div = L.DomUtil.create('div', 'info legend');
-				
+				var div = L.DomUtil.create('div', 'info legend');			
 				for (var i = 0; i< typeList.length; i++) {
 					div.innerHTML +=
 						'<i style="background-color:' + getColor(typeList[i]) + '"></i> ' + (typeList[i] ? typeList[i] + '</br>' : '+');
 				}		
 				return div;
 			}
-			
+						
+//			Add Legend			
 			legend.addTo(map);
 			
-            // Location Controls
+// 			Location Controls
 			var lc = L.control.locate({
 				position: 'topright',
 //				follow: true,
@@ -158,9 +144,7 @@
 					enableHighAccuracy: true
 				}
 			}).addTo(map);
-			
 			map.on('dragstart', lc._stopFollowing, lc);
-
 
 //			Sidebar Functions
             function FeatureClick() {
@@ -168,9 +152,6 @@
                 var content = document.getElementById('main-content');
                 info.push("<div class='infoblock' style=\"background-color:" + this.options.divcolor + ";\">Name: " + this.options.name + "</br>Type: " + this.options.brewery_type + "</br><a target=\"_blank\" href=\"http://www.google.com/maps/place/" + this.options.address + "\">" + this.options.address + "</a></br><a target=\"_blank\" href=\"" + this.options.url + "\">" + this.options.url + "</a></div>");
                 content.innerHTML = (info.join("\n"));
-//            	$('#sidebar').removeClass('collapsed');
-  //          	$('#content-tab').addClass('active');
-    //        	$('#home').addClass('active');
             }
             function sidebarInfo(a) {
                 var info = []
@@ -182,14 +163,22 @@
                     }
                 });
             	content.innerHTML = (info.join("\n"));
-//            	$('#sidebar').removeClass('collapsed');
-  //          	$('#content-tab').addClass('active');
-    //        	$('#home').addClass('active');
             }            
             function hideSidebar() {
             	$('#sidebar').addClass('collapsed');
 			}
 
+//			Add Brewery Types to Filter Based on typeList
+			function addTypes() {
+				var div = document.getElementById('filterChecks');				
+				for (var i = 0; i< typeList.length; i++) {
+					div.innerHTML +=
+						'<input type="checkbox" name="breweryType" onclick="updateType();" value="' + (typeList[i] ? typeList[i] + '" checked>' + typeList[i] + '</br>' : '+');
+					}
+				return div;
+			}
+			
+//			Get Colors for Legend
 			function getColor(d) {
 				return 	d=='Planning' ? '#e41a1c' :
 						d=='Micro' ? '#377eb8' :
@@ -200,19 +189,31 @@
 						d=='Contract' ? '#a65628':
 							'#ffffff';
 			}
-			
+
+//			Filter by Brewery Type			
  			function updateType() {
+ 			   	var type = document.getElementById('filterChecks').breweryType;
  			    typeList = [];
                 for (var i = 0; i < type.length; i++) {
                     if (type[i].checked) typeList.push(type[i].value);
                 }
                 loadRecords();
-                brewerycluster.clearLayers();
-                legend.removeFrom(map);
-                brewerycluster.addLayer(brewerylayer);
-                legend.addTo(map);
+                refreshBreweries();
+				refreshLegend();
  			}
 
+//			Refresh Legend
+			function refreshLegend() {
+                legend.removeFrom(map);
+                legend.addTo(map);
+            }				
+
+//			Refresh Brewery Clusters
+			function refreshBreweries() {
+                brewerycluster.clearLayers();
+                brewerycluster.addLayer(brewerylayer);
+			}
+			
 //          Records Loading Function			    
 		    function loadRecords() {
 			    brewerylayer = new L.geoJson(breweries, {
