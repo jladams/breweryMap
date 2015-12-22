@@ -141,6 +141,7 @@
 				e.layer.openPopup();
 				$('#sidebar').addClass('collapsed');
 				$('#search-tab').removeClass('active');
+				document.activeElement.blur();
 			});
 	
 			map.addControl( searchControl );
@@ -201,7 +202,9 @@
 
 //			Add Brewery Types to Filter Based on typeList
 			function addTypes() {
-				var div = document.getElementById('filterChecks');				
+				var div = document.getElementById('filterChecks');
+				div.innerHTML +=
+					'<input type="checkbox" onchange="checkAll(this)" name="chk[]" checked />Select/Deselect All</br>';								
 				for (var i = 0; i< typeList.length; i++) {
 					div.innerHTML +=
 						'<input type="checkbox" name="breweryType" onclick="updateType();" value="' + (typeList[i] ? typeList[i] + '" checked>' + typeList[i] + '</br>' : '+');
@@ -232,6 +235,25 @@
                 refreshBreweries();
 				refreshLegend();
  			}
+
+//			Select All/None Filters
+			function checkAll(ele) {
+     			var checkboxes = document.getElementsByTagName('input');
+     			if (ele.checked) {
+         			for (var i = 0; i < checkboxes.length; i++) {
+             			if (checkboxes[i].type == 'checkbox') {
+                 			checkboxes[i].checked = true;
+             			}
+         			}
+     			} else {
+         			for (var i = 0; i < checkboxes.length; i++) {
+             			if (checkboxes[i].type == 'checkbox') {
+                 			checkboxes[i].checked = false;
+            			}
+         			}
+     			}
+     			updateType();
+ 			};
 
 //			Refresh Legend
 			function refreshLegend() {
