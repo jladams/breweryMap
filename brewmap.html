@@ -142,14 +142,16 @@
 //			Search Control Function
 			searchControl.on('search_locationfound', function(e) {
 				map.setZoom(17);
-				if(e.layer._popup)
-				e.layer.openPopup();
+				if(e.layer._popup) {
+					e.layer.openPopup();
+				}
 				$('#sidebar').addClass('collapsed');
 				$('#search-tab').removeClass('active');
 				document.activeElement.blur();
 			});
+			
 //			Add Search Control	
-			map.addControl( searchControl );
+			map.addControl(searchControl);
 
 // 			Scale
 			L.control.scale({position: 'topright'}).addTo(map);
