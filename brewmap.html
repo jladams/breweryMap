@@ -90,7 +90,6 @@
 		<script>
 //			Create map and set initial view			
 		    var map = L.map('map', {zoomControl: false}).setView([35.472865, -97.600536], 5);
-			new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 //			Base tiles
             var Esri_WorldTopoMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -100,7 +99,7 @@
 //          Create Sidebar
             var sidebar = L.control.sidebar('sidebar', {}).addTo(map);
             
-//          Set initial filter variables
+//          List of Brewery Types for Filter and Legend
             var typeList = ["Brewpub","Micro","Proprietor","Regional","Large","Contract","Planning"];
 			addTypes();
                                   						    
@@ -114,6 +113,10 @@
 
 //          Add info to sidebar
             brewerycluster.on('clusterclick', sidebarInfo);
+
+//		Legends, Controls, Info
+//			Zoom control in top right
+			new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 // 			Scale
 			L.control.scale({position: 'topright'}).addTo(map);
@@ -146,6 +149,7 @@
 			}).addTo(map);
 			map.on('dragstart', lc._stopFollowing, lc);
 
+//		Functions
 //			Sidebar Functions
             function FeatureClick() {
                 var info = []
@@ -214,7 +218,7 @@
                 brewerycluster.addLayer(brewerylayer);
 			}
 			
-//          Records Loading Function			    
+//          Load Records			    
 		    function loadRecords() {
 			    brewerylayer = new L.geoJson(breweries, {
 			        onEachFeature: function (feature, layer) {
@@ -239,7 +243,7 @@
          		            }).on('click', FeatureClick)
      			    }
      		    });
-     	    };		
+     	    };
 		</script>
 	</body>
 </html>
