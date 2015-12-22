@@ -39,7 +39,7 @@
             	<ul role="tablist">
                 	<li id="content-tab"><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
                 	<li><a href="#filters" role="tab"><i class="fa fa-sliders"></i></a></li>
-                	<li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
+                	<li id="search-tab"><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
             	</ul>
 
             	<ul role="tablist">
@@ -140,6 +140,7 @@
 				if(e.layer._popup)
 				e.layer.openPopup();
 				$('#sidebar').addClass('collapsed');
+				$('#search-tab').removeClass('active');
 			});
 	
 			map.addControl( searchControl );
