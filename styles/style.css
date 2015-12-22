@@ -30,6 +30,10 @@ html, body, #map {
 	height: 100%;
 }
 
+.search-tooltip {
+	margin-top: 35px;
+}
+
 .modal {
 	margin-left: 40px;
 }
