@@ -373,7 +373,7 @@ var breweries = {
       "properties": {
         "Brewery": "brewery",
         "Name": "Brooklyn Brewery",
-        "Address": "1 Brewers Row 79 N 11th St Brooklyn, NY 11249-1913",
+        "Address": "79 N 11th St Brooklyn, NY 11249-1913",
         "Brewery_Type": "Regional", "Color" : "#4daf4a", "BGColor" : "rgba(77,175,74,0.3)",
         "URL": "http:\/\/www.brooklynbrewery.com",
         "URL_Title": "www.brooklynbrewery.com",
