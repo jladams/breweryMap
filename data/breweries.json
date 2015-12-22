@@ -6,8 +6,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          27.753463,
-          -26.073683
+          -71.515019,
+          42.430785
         ]
       },
       "properties": {
@@ -26,8 +26,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          6.884016,
-          47.03195
+          -70.8847,
+          42.2161
         ]
       },
       "properties": {
@@ -46,8 +46,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          24.303777,
-          56.939415
+          -71.1131,
+          42.3076
         ]
       },
       "properties": {
@@ -66,8 +66,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          10.669447,
-          60.776253
+          -71.4939,
+          41.6429
         ]
       },
       "properties": {
@@ -86,8 +86,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          148.280454,
-          -37.293891
+          -70.8999,
+          43.0154
         ]
       },
       "properties": {
@@ -106,8 +106,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -70.70948,
-          -33.422208
+          -73.006,
+          44.6182
         ]
       },
       "properties": {
@@ -126,8 +126,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          25.630261,
-          42.200614
+           -72.5722,
+          41.8353
         ]
       },
       "properties": {
@@ -146,8 +146,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          25.698342,
-          41.50918
+          -73.521,
+          41.1005
         ]
       },
       "properties": {
@@ -166,8 +166,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          9.442594,
-          46.748149
+          -74.2082,
+          41.0086
         ]
       },
       "properties": {
@@ -186,8 +186,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          26.339126,
-          43.047003
+          -74.5981,
+          40.7794
         ]
       },
       "properties": {
@@ -206,8 +206,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          44.251394,
-          14.500513
+          -74.9719,
+          39.883
         ]
       },
       "properties": {
@@ -373,7 +373,7 @@ var breweries = {
       "properties": {
         "Brewery": "brewery",
         "Name": "Brooklyn Brewery",
-        "Address": "79 N 11th St Brooklyn, NY 11249-1913",
+        "Address": "1 Brewers Row 79 N 11th St Brooklyn, NY 11249-1913",
         "Brewery_Type": "Regional", "Color" : "#4daf4a", "BGColor" : "rgba(77,175,74,0.3)",
         "URL": "http:\/\/www.brooklynbrewery.com",
         "URL_Title": "www.brooklynbrewery.com",
@@ -99406,8 +99406,8 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          121.536292,
-          -30.810192
+          -122.5333,
+          47.1667
         ]
       },
       "properties": {
@@ -101266,14 +101266,14 @@ var breweries = {
       "geometry": {
         "type": "Point",
         "coordinates": [
-          115.927411,
-          -32.036081
+          -122.3053,
+          47.8278
         ]
       },
       "properties": {
         "Brewery": "brewery",
         "Name": "Crucible Brewing Company",
-        "Address": "Lynwood, WA",
+        "Address": "Lynnwood, WA",
         "Brewery_Type": "Planning", "Color" : "#e41a1c", "BGColor" : "rgba(228,26,28,0.3)",
         "URL": "",
         "URL_Title": "",
