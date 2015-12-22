@@ -7,16 +7,19 @@
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
  		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-		<script src="leaflet.markercluster.js" type="text/javascript"></script>
+		<script src="js/leaflet.markercluster.js" type="text/javascript"></script>
   		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  		<script src="leaflet-sidebar.js"></script>
+  		<script src="js/leaflet-sidebar.js"></script>
+		<script src="js/leaflet-search.min.js"></script>
         
 <!-- 	Links to static data -->
   		<script src="data/breweries.json" type="text/javascript"></script>
 
 <!--	Styles -->
+        <link rel="stylesheet" href="styles/leaflet-search.min.css" />
+        <link rel="stylesheet" href="styles/leaflet-search.mobile.min.css" />
         <link rel="stylesheet" href="styles/style.css" />
 		<link rel="stylesheet" href="styles/MarkerCluster.css" />
 		<link rel="stylesheet" href="styles/MarkerCluster.Default.css" />
@@ -36,6 +39,7 @@
             	<ul role="tablist">
                 	<li id="content-tab"><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
                 	<li><a href="#filters" role="tab"><i class="fa fa-sliders"></i></a></li>
+                	<li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
             	</ul>
 
             	<ul role="tablist">
@@ -54,6 +58,10 @@
                 		<p>Brewery Type</p>
 						<form id="filterChecks"></form>
 					</div>
+            	</div>
+            	<div class="sidebar-pane" id="search">
+                	<h1 class="sidebar-header">Search<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+					<div id="findbox"></div>
             	</div>
         	</div>
     	</div>
@@ -117,6 +125,24 @@
 //		Legends, Controls, Info
 //			Zoom control in top right
 			new L.Control.Zoom({ position: 'topright' }).addTo(map);
+
+			var searchControl = new L.Control.Search({
+				container:'findbox', 
+				initial:false, 
+				collapsed:false,
+				layer: brewerycluster,
+				propertyName: 'Name',
+				circleLocation:false
+			});
+
+			searchControl.on('search_locationfound', function(e) {
+				map.setZoom(16);
+				if(e.layer._popup)
+				e.layer.openPopup();
+				$('#sidebar').addClass('collapsed');
+			});
+	
+			map.addControl( searchControl );
 
 // 			Scale
 			L.control.scale({position: 'topright'}).addTo(map);
