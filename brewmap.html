@@ -126,6 +126,7 @@
 //			Zoom control in top right
 			new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
+//			Search Control Options
 			var searchControl = new L.Control.Search({
 				container:'findbox', 
 				initial:false, 
@@ -135,6 +136,7 @@
 				circleLocation:false
 			});
 
+//			Search Control Function
 			searchControl.on('search_locationfound', function(e) {
 				map.setZoom(16);
 				if(e.layer._popup)
@@ -143,13 +145,13 @@
 				$('#search-tab').removeClass('active');
 				document.activeElement.blur();
 			});
-	
+//			Add Search Control	
 			map.addControl( searchControl );
 
 // 			Scale
 			L.control.scale({position: 'topright'}).addTo(map);
 
-//			Legend
+//			Legend Options
 			var legend = L.control({position: 'bottomright'});
 			
 //			Legend Function
